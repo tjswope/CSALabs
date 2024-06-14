@@ -6,6 +6,26 @@ import java.util.ArrayList;
 public class DigitMatcher {
     private ArrayList<Digit> digits;
 
+    /*
+     * Task 1
+     * Calculates the difference (percentage of pixels) between two handwritten digits
+     * @param digitA
+     * @param digitB
+     * @return the difference between two digits
+     */
+    public int difference ( Digit digitA, Digit digitB ) {
+
+        return 0;
+    }
+
+    /*
+     * Task 2
+     * Initializes the digits array with digits from a file
+     * @param file containing the digits
+     * 
+     * File format:
+     * 
+     */
     public DigitMatcher(String filePath) throws IOException {
         digits = new ArrayList<>();
         
