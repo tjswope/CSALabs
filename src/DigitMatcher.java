@@ -1,25 +1,13 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class DigitMatcher {
     private ArrayList<Digit> digits;
 
     /*
      * Task 1
-     * Calculates the difference (percentage of pixels) between two handwritten digits
-     * @param digitA
-     * @param digitB
-     * @return the difference between two digits
-     */
-    public int difference ( Digit digitA, Digit digitB ) {
-
-        return 0;
-    }
-
-    /*
-     * Task 2
      * Initializes the digits array with digits from a file
      * @param file containing the digits
      * 
@@ -29,12 +17,12 @@ public class DigitMatcher {
     public DigitMatcher(String filePath) throws IOException {
         digits = new ArrayList<>();
         
-        BufferedReader br = new BufferedReader(new FileReader(filePath));
-        String line;
+        Scanner s = new Scanner(new File(filePath));
+        
         // Skip the header line if present
-        br.readLine();
-        while ((line = br.readLine()) != null) {
-            String[] values = line.split(",");
+        s.nextLine();
+        while (s.hasNext()) {
+            String[] values = s.nextLine().split(",");
             int label = Integer.parseInt(values[0]);
             int[] pixels = new int[784];
             for (int i = 0; i < 784; i++) {
@@ -42,9 +30,21 @@ public class DigitMatcher {
             }
             digits.add(new Digit(label, pixels));
         }
-        br.close();
+        s.close();
     }
 
+    /*
+     * Task 2
+     * Calculates the difference (percentage of pixels) between two handwritten digits
+     * @param digitA
+     * @param digitB
+     * @return the difference between two digits
+     */
+    public int difference ( Digit digitA, Digit digitB ) {
+
+        return 0;
+    }
+    
     public ArrayList<Digit> getDigits() {
         return digits;
     }
@@ -57,6 +57,8 @@ public class DigitMatcher {
         }
     }
 
+
+    
     public static void main(String[] args) {
         try {
         	DigitMatcher digitCollection = new DigitMatcher("src\train.csv");
