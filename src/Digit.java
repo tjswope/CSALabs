@@ -90,4 +90,8 @@ public class Digit {
         }
         return image;
     }
+
+    public String toString () {
+        return String.format("[Label %d, Similarity %d]", label, similarity);
+    }
 }

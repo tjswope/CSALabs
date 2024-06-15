@@ -67,11 +67,12 @@ public class DigitMatcher {
     }
 
     /*
+     * Depends on computeSimilarity()
+     * 
      * Returns the Digit with the smallest similarity value.
      * 
      * The lowest the value the greater the similarity.
      * 
-     * This method depends on computeSimilarity()
      */
     public Digit mostSimilar () {
 
@@ -89,6 +90,8 @@ public class DigitMatcher {
     }
 
     /*
+     * Depends on computeSimilarity()
+     * 
      * Rank the Digits from the digits ArrayList by similarity.
      * 
      * The lowest the value the greater the similarity. The most similar
