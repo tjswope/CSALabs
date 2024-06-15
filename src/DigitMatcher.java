@@ -8,6 +8,13 @@ public class DigitMatcher {
     /* Array holding the dataset of digits */
     private ArrayList<Digit> digits;
 
+    /*  
+     * Range of grey values that is considered a match. If the 
+     * value is 150 then two pixels with values of 80 and 200 would
+     * be considered a match.
+     */
+    private int pixelMatchRange;
+
     /*
      * Task 1
      * Initializes the digits array with digits from a file
@@ -35,6 +42,12 @@ public class DigitMatcher {
         s.close();
     }
 
+    public DigitMatcher(String filePath, int pixelMatchRange) throws IOException {
+
+        this(filePath);
+        setPixelMatchRange(pixelMatchRange);
+    }
+
     /*
      * Task 2b
      * Calculates the similarity between two handwritten digits.
@@ -47,7 +60,7 @@ public class DigitMatcher {
     public void computeSimilarity ( Digit digit ) {
 
         for ( Digit d : digits ) {
-            d.setSimilarity( digit );
+            d.setSimilarity( digit, pixelMatchRange );
         }
     }
 
@@ -139,6 +152,10 @@ public class DigitMatcher {
     /*
      * Task 7
      */
+
+    public void setPixelMatchRange (int pixelMatchRange ) {
+        this.pixelMatchRange = pixelMatchRange;
+    }
 
     public ArrayList<Digit> getDigits() {
         return digits;

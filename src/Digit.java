@@ -43,11 +43,26 @@ public class Digit {
      * between the two handwritten digits.
      * 
      * The lowest the value the greater the similarity.
+     * 
+     * @param other the digit this object is compared to.
+     * @param pixelMatchRange Range of grey values that is considered a match. If the 
+     * value is 150 then two pixels with values of 80 and 200 would
+     * be considered a match. 200 - 80 = 120. 120 < 150.
      */
-    public void setSimilarity (Digit other) {
+    public void setSimilarity (Digit other, int pixelMatchRange) {
         
+        int difference = matrix.length * matrix.length;
 
+        for ( int r = 0; r < matrix.length; r++ ) {
+            for ( int c = 0; c < matrix[r].length; c++ ) {
 
+                int diff = Math.abs(matrix[r][c] - other.getMatrix()[r][c]);
+                if ( diff < pixelMatchRange ) {
+                    difference -= 1;
+                }
+            }
+        }
+        similarity = difference;
     }
 
     public int getSimilarity () {
