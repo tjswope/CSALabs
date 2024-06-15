@@ -4,8 +4,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Digit {
+
 	private int label;
     private int[][] matrix;
+    private int similarity;
 
     public Digit(int label, int[] pixels) {
     	this.label = label;
@@ -33,6 +35,19 @@ public class Digit {
     	return label;
     }
     
+    /*
+     * Task 2a
+     * Calculates how similar this Digit is to other.
+     * 
+     * The similarity is calculated by taking the difference (percentage of pixels) 
+     * between the two handwritten digits.
+     */
+    public void setSimilarity (Digit other) {
+        
+
+
+    }
+
     public void printMatrix() {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {

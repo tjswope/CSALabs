@@ -36,19 +36,19 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 2
+     * Task 2b
      * Calculates the similarity between two handwritten digits.
      * 
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two digits.
      *
-     * @param digitA
-     * @param digitB
-     * @return the difference between two digits
+     * @param digit
      */
-    public int similarity ( Digit digitA, Digit digitB ) {
+    public void computeSimilarity ( Digit digit ) {
 
-        return 0;
+        for (Digit d : digits) {
+            d.setSimilarity(digit);
+        }
     }
 
     /*
@@ -74,9 +74,9 @@ public class DigitMatcher {
         ArrayList<Digit> rank = new ArrayList<Digit>(k);
         return rank;
     }
-
+ 
     /*
-     * Task 5
+     * Task 5: 
      */
     public Digit kNearestNeighbors () {
 
