@@ -54,7 +54,7 @@ public class DigitMatcher {
     /*
      * Task 3: returns the Digit with the smallest similarity value.
      * 
-     * The lowest the value the most similar the digit is.
+     * The lowest the value the greater the similarity.
      * 
      * This method depends on computeSimilarity()
      */
@@ -76,19 +76,51 @@ public class DigitMatcher {
     /*
      * Task 4: rank the Digits from the digits ArrayList by similarity.
      * 
-     * The lowest the similarity (the highest the rank) is expected
-     * to be at index 0, the next lowest similarity at index 1 and so on.
+     * The lowest the value the greater the similarity. The most similar
+     * digit is expected to be at index 0, the next lowest similarity at 
+     * index 1 and so on.
      * 
-     * @param k is the number of Digits we are interested in.
-     * @param digit is the digit used to find similar digits in the ArrayList of digits.
      * @return an ArrayList with k Digits ranked by similarity.
      */
-    public ArrayList<Digit> rankBySimilarity ( int k, Digit digit ) {
+    public void rankBySimilarity () {
 
-        ArrayList<Digit> rank = new ArrayList<Digit>(k);
-        return rank;
+        // Selection sort
+        for ( int i = 0; i < digits.size(); i++ ) {
+            int maxSimIndex = greatestSimilarity(i, digits.size());
+
+            // swap the Digit at index maxSimIndex with the Digit at i
+            Digit temp = digits.get(i);
+            digits.set(i, digits.get(maxSimIndex));
+            digits.set(maxSimIndex, temp);
+        }
+        
     }
  
+    /*
+     * Task 4
+     * 
+     * Find the Digit from the ArrayList digits with the greatest similarity (lowest value)
+     * between the indices [l, h].
+     * 
+     * The lowest the value the greater the similarity.
+     * 
+     * @return the index (from digits array) of the Digit with greatest similarity.
+     */
+    public int greatestSimilarity (int l, int h) {
+
+        int index = l;
+
+        for ( int i = l+1; i <= h; i++  ) {
+            
+            if ( digits.get(index).getSimilarity() > digits.get(i).getSimilarity() ) {
+                // found a more similar digit
+                index = i;
+            }
+        }
+
+        return index;
+    }
+
     /*
      * Task 5: 
      */
@@ -103,6 +135,10 @@ public class DigitMatcher {
     public Digit weightedKNearestNeighbors () {
         return null;
     }
+
+    /*
+     * Task 7
+     */
 
     public ArrayList<Digit> getDigits() {
         return digits;

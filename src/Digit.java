@@ -41,6 +41,8 @@ public class Digit {
      * 
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two handwritten digits.
+     * 
+     * The lowest the value the greater the similarity.
      */
     public void setSimilarity (Digit other) {
         
@@ -50,6 +52,10 @@ public class Digit {
 
     public int getSimilarity () {
         return similarity;
+    }
+
+    public int compareTo (Digit other) {
+        return this.similarity - other.similarity;
     }
 
     public void printMatrix() {
