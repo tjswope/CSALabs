@@ -137,9 +137,11 @@ public class DigitMatcher {
     /*
      * Task 5
      * 
-     * Find the k nearest neighbors based on similarity.
-     * 
      * Depends on rankBySimilarity()
+     * 
+     * Steps: 
+     * 1. Find the k nearest neighbors based on similarity.
+     * 2. Of the k neighbors, finds the label that appears most often.
      * 
      * @param k 
      * @return the label that occurs the most within the first k objects in digits.
@@ -155,7 +157,7 @@ public class DigitMatcher {
             votes[label] += 1;
         }
         
-        // find the label with most votes
+        // Find the label with most votes
         int mostVotedLabel = votes[0];
         for ( int i = 1; i < votes.length; i++ ) {
             if ( mostVotedLabel < votes[1] ) {
@@ -167,14 +169,38 @@ public class DigitMatcher {
     
     /*
      * Task 6
+     *
+     * Depends on rankBySimilarity()
+     * 
+     * 1. Find the k nearest neighbors based on similarity.
+     * 2. For each of the k neighbors, compute how confident (based on similarity) 
+     * we are that is the correct digit.
+     * 3. Find the label with the highest confidence level.
+     * 
+     * @param k 
+     * @return the label that occurs the most within the first k objects in digits.
      */
-    public Digit weightedKNearestNeighbors () {
-        return null;
+    public int weightedKNearestNeighbors (int k) {
+        
+        int[] votes = new int[10]; // 10 digits. Cannot hardcode if we use other characters.
+        
+        // The first k Digit objects in digits are ranked by similarity.
+        // Index 0 has the most similar digit.
+        for ( int i = 0; i < k; i++ ) {
+            int label = digits.get(i).getLabel(); // this value will range from 0-9
+            votes[label] += digits.get(i).getSimilarity();
+        }
+        
+        // Find the label with most votes
+        // The lowest the voting value the greater the similarity, so find the smallest value.
+        int mostVotedLabel = votes[0];
+        for ( int i = 1; i < votes.length; i++ ) {
+            if ( mostVotedLabel > votes[1] ) {
+                mostVotedLabel = i;
+            }
+        }
+        return mostVotedLabel;
     }
-
-    /*
-     * Task 7
-     */
 
     public void setPixelMatchRange (int pixelMatchRange ) {
         this.pixelMatchRange = pixelMatchRange;
