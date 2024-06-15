@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class DigitMatcher {
 
-    /* Array to hold the dataset of digits */
+    /* Array holding the dataset of digits */
     private ArrayList<Digit> digits;
 
     /*
@@ -55,6 +55,9 @@ public class DigitMatcher {
      * Task 3:
      * 
      */
+    public Digit mostSimilar ( Digit digit ) {
+        return null;
+    }
 
     /*
      * Task 4: rank the Digits from the digits ArrayList by similarity.
@@ -66,7 +69,7 @@ public class DigitMatcher {
      * @param digit is the digit used to find similar digits in the ArrayList of digits.
      * @return an ArrayList with k Digits ranked by similarity.
      */
-    public ArrayList<Digit> rankBySimilarity (int k, Digit digit) {
+    public ArrayList<Digit> rankBySimilarity ( int k, Digit digit ) {
 
         ArrayList<Digit> rank = new ArrayList<Digit>(k);
         return rank;
