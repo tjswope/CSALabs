@@ -48,6 +48,10 @@ public class Digit {
 
     }
 
+    public int getSimilarity () {
+        return similarity;
+    }
+
     public void printMatrix() {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {

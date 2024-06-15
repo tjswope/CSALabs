@@ -46,17 +46,31 @@ public class DigitMatcher {
      */
     public void computeSimilarity ( Digit digit ) {
 
-        for (Digit d : digits) {
-            d.setSimilarity(digit);
+        for ( Digit d : digits ) {
+            d.setSimilarity( digit );
         }
     }
 
     /*
-     * Task 3:
+     * Task 3: returns the Digit with the smallest similarity value.
      * 
+     * The lowest the value the most similar the digit is.
+     * 
+     * This method depends on computeSimilarity()
      */
-    public Digit mostSimilar ( Digit digit ) {
-        return null;
+    public Digit mostSimilar () {
+
+        Digit most = digits.get(0);
+
+        for ( int i = 1; i < digits.size(); i++ ) {
+
+            Digit digit = digits.get(i);
+            if ( digit.getSimilarity() < most.getSimilarity() ) {
+                most = digit;
+            }
+        }
+
+        return most;
     }
 
     /*
