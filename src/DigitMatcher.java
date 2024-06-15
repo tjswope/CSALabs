@@ -135,11 +135,34 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 5: 
+     * Task 5
+     * 
+     * Find the k nearest neighbors based on similarity.
+     * 
+     * Depends on rankBySimilarity()
+     * 
+     * @param k 
+     * @return the label that occurs the most within the first k objects in digits.
      */
-    public Digit kNearestNeighbors () {
+    public int kNearestNeighbors (int k) {
 
-        return null;
+        int[] votes = new int[10]; // 10 digits. Cannot hardcode if we use other characters.
+
+        // The first k Digit objects in digits are ranked by similarity.
+        // Index 0 has the most similar digit.
+        for ( int i = 0; i < k; i++ ) {
+            int label = digits.get(i).getLabel(); // this value will range from 0-9
+            votes[label] += 1;
+        }
+        
+        // find the label with most votes
+        int mostVotedLabel = votes[0];
+        for ( int i = 1; i < votes.length; i++ ) {
+            if ( mostVotedLabel < votes[1] ) {
+                mostVotedLabel = i;
+            }
+        }
+        return mostVotedLabel;
     }
     
     /*
