@@ -16,7 +16,7 @@ public class DigitMatcher {
     private int pixelMatchRange;
 
     /*
-     * Task 1
+     * Constructor 
      * Initializes the digits array with digits from a file
      * @param file containing the digits
      * 
@@ -42,6 +42,9 @@ public class DigitMatcher {
         s.close();
     }
 
+    /*
+     * Constructor given to students
+     */
     public DigitMatcher(String filePath, int pixelMatchRange) throws IOException {
 
         this(filePath);
@@ -49,7 +52,6 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 2b
      * Calculates the similarity between two handwritten digits.
      * 
      * The similarity is calculated by taking the difference (percentage of pixels) 
@@ -65,7 +67,7 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 3: returns the Digit with the smallest similarity value.
+     * Returns the Digit with the smallest similarity value.
      * 
      * The lowest the value the greater the similarity.
      * 
@@ -87,7 +89,7 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 4: rank the Digits from the digits ArrayList by similarity.
+     * Rank the Digits from the digits ArrayList by similarity.
      * 
      * The lowest the value the greater the similarity. The most similar
      * digit is expected to be at index 0, the next lowest similarity at 
@@ -106,12 +108,9 @@ public class DigitMatcher {
             digits.set(i, digits.get(maxSimIndex));
             digits.set(maxSimIndex, temp);
         }
-        
     }
  
     /*
-     * Task 4
-     * 
      * Find the Digit from the ArrayList digits with the greatest similarity (lowest value)
      * between the indices [l, h].
      * 
@@ -135,8 +134,6 @@ public class DigitMatcher {
     }
 
     /*
-     * Task 5
-     * 
      * Depends on rankBySimilarity()
      * 
      * Steps: 
@@ -168,13 +165,10 @@ public class DigitMatcher {
     }
     
     /*
-     * Task 6
-     *
      * Depends on rankBySimilarity()
      * 
      * 1. Find the k nearest neighbors based on similarity.
-     * 2. For each of the k neighbors, compute how confident (based on similarity) 
-     * we are that is the correct digit.
+     * 2. For each of the k neighbors, compute the votes (based on similarity).
      * 3. Find the label with the highest confidence level.
      * 
      * @param k 
