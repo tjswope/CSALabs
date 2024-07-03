@@ -16,7 +16,6 @@ public class Digit {
     }
 
     private void constructMatrix(int[] pixels) {
-    	this.label = -1;
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
                 matrix[i][j] = pixels[i * 28 + j];
@@ -33,15 +32,14 @@ public class Digit {
     }
     
     /*
-     * Task 2a
-     * Calculates how similar this Digit is to other.
+     * Calculates how similar this Digit is to another Digit.
      * 
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two handwritten digits.
      * 
      * The lowest the value the greater the similarity.
      * 
-     * @param other the digit this object is compared to.
+     * @param other the digit this object is compared against.
      * @param pixelMatchRange Range of grey values that is considered a match. If the 
      * value is 150 then two pixels with values of 80 and 200 would
      * be considered a match. 200 - 80 = 120. 120 < 150.

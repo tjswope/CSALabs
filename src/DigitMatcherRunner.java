@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 public class DigitMatcherRunner {
 
-    public static ArrayList<Digit> populateArrayOfDigits (String testDigitsFilePath) throws IOException {
+    /*
+     * The test digit files do not contain a label 
+     */
+    public static ArrayList<Digit> populateArrayOfTestDigits (String testDigitsFilePath) throws IOException {
 
         ArrayList<Digit> testDigits = new ArrayList<>();
         
@@ -15,11 +18,12 @@ public class DigitMatcherRunner {
         s.nextLine();
         while (s.hasNext()) {
             String[] values = s.nextLine().split(",");
-            int label = Integer.parseInt(values[0]);
             int[] pixels = new int[784];
             for (int i = 0; i < 784; i++) {
-                pixels[i] = Integer.parseInt(values[i + 1]);
+                pixels[i] = Integer.parseInt(values[i]);
             }
+            // label is unknown because this is the test digits.
+            int label = 10; // ?????? should we use some other value for unknown label ???????
             testDigits.add(new Digit(label, pixels));
         }
         s.close();
@@ -28,19 +32,19 @@ public class DigitMatcherRunner {
 
     public static void main(String[] args) {
         try {
-        	DigitMatcher digitCollection = new DigitMatcher("src\train.csv");
-            digitCollection.printDigits();
+        	DigitMatcher digitCollection = new DigitMatcher("src/train.csv");
+            //digitCollection.printDigits();
 
-            ArrayList<Digit> testDigits = populateArrayOfDigits("src\test.csv");
+            ArrayList<Digit> testDigits = populateArrayOfTestDigits("src/test.csv");
 
             // Example for one digit, say index 0
-            Digit digit = testDigits.get(0);
+            Digit testDigit = testDigits.get(0);
 
-            digitCollection.computeSimilarity(digit);
+            digitCollection.computeSimilarity(testDigit);
             digitCollection.rankBySimilarity();
             int matchingLabel = digitCollection.kNearestNeighbors(7);
 
-            System.out.printf("Digit %s was matched to label %d. Is that a match?", digit, matchingLabel);
+            System.out.printf("Digit %s was matched to label %d. Is that a correct match?\nLabel 10 indicates a test digit.", testDigit, matchingLabel);
 
             
         } catch (IOException e) {

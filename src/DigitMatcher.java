@@ -43,7 +43,12 @@ public class DigitMatcher {
     }
 
     /*
-     * Constructor given to students
+     * Constructor given to students.
+     * 
+     * @param file containing the digits
+     * @param pixelMatchRange Range of grey values that is considered a match. If the 
+     * value is 150 then two pixels with values of 80 and 200 would
+     * be considered a match. 200 - 80 = 120. 120 < 150. 
      */
     public DigitMatcher(String filePath, int pixelMatchRange) throws IOException {
 
@@ -52,12 +57,14 @@ public class DigitMatcher {
     }
 
     /*
-     * Calculates the similarity between two handwritten digits.
+     * Computes how similar the parameter digit is to all digits in the dataset. More
+     * specifically, calculates the similarity between (two handwritten digits) the 
+     * parameter digit and all the digits in the dataset.
      * 
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two digits.
      *
-     * @param digit
+     * @param digit is the digit that will be compared with the dataset of digits.
      */
     public void computeSimilarity ( Digit digit ) {
 
@@ -67,11 +74,14 @@ public class DigitMatcher {
     }
 
     /*
-     * Depends on computeSimilarity()
+     * Assumes computeSimilarity() has been called to calculate the similaty between
+     * a digit and every digit in the dataset of digits.
      * 
-     * Returns the Digit with the smallest similarity value.
+     * Returns the Digit from the dataset most similar to the parameter 
+     * digit of computeSimilarity().
      * 
-     * The lowest the value the greater the similarity.
+     * The most similar digit has the smallest similarity value (the lowest the 
+     * value the greater the similarity).
      * 
      */
     public Digit mostSimilar () {
@@ -90,9 +100,10 @@ public class DigitMatcher {
     }
 
     /*
-     * Depends on computeSimilarity()
+     * Assumes computeSimilarity() has been called to calculate the similaty between
+     * a digit and every digit in the dataset of digits.
      * 
-     * Rank the Digits from the digits ArrayList by similarity.
+     * Rank the Digits in the digits dataset by similarity.
      * 
      * The lowest the value the greater the similarity. The most similar
      * digit is expected to be at index 0, the next lowest similarity at 
@@ -104,7 +115,7 @@ public class DigitMatcher {
 
         // Selection sort
         for ( int i = 0; i < digits.size(); i++ ) {
-            int maxSimIndex = greatestSimilarity(i, digits.size());
+            int maxSimIndex = greatestSimilarity(i, digits.size()-1);
 
             // swap the Digit at index maxSimIndex with the Digit at i
             Digit temp = digits.get(i);
@@ -119,6 +130,7 @@ public class DigitMatcher {
      * 
      * The lowest the value the greater the similarity.
      * 
+     * @param 
      * @return the index (from digits array) of the Digit with greatest similarity.
      */
     public int greatestSimilarity (int l, int h) {
@@ -203,12 +215,18 @@ public class DigitMatcher {
         this.pixelMatchRange = pixelMatchRange;
     }
 
+    /*
+     * Returns the dataset of digits.
+     */
     public ArrayList<Digit> getDigits() {
         return digits;
     }
 
+    /*
+     * Prints the dataset of digits.
+     */
     public void printDigits() {
-        for (Digit digit : digits) {
+        for ( Digit digit : digits ) {
             System.out.println("Label: " + digit.getLabel());
             digit.printMatrix();
             System.out.println();
