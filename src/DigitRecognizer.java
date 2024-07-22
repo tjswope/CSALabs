@@ -24,8 +24,8 @@ public class DigitRecognizer {
             String[] values = s.nextLine().split(",");
             int label = Integer.parseInt(values[0]);
             int[] pixels = new int[784];
-            for (int i = 0; i < 784; i++) {
-                pixels[i] = Integer.parseInt(values[i + 1]);
+            for (int i = 1; i < 784; i++) {
+                pixels[i] = Integer.parseInt(values[i]) == 0 ? 0 : 1;
             }
             testDigits.add(new Digit(label, pixels));
         }

@@ -1,30 +1,30 @@
 import java.awt.image.BufferedImage;
 
-public class Digit {
+public class Digit implements Comparable<Digit>{
 
 	private int label;
-    private int[][] matrix;
-    private int similarity;
+    private int[][] pixels;
+    private double similarity;
 
     public Digit(int label, int[] pixels) {
     	this.label = label;
         if (pixels.length != 784) {
             throw new IllegalArgumentException("Pixel array must contain exactly 784 elements.");
         }
-        matrix = new int[28][28];
-        constructMatrix(pixels);
+        this.pixels = new int[28][28];
+        constructpixels(pixels);
     }
 
-    private void constructMatrix(int[] pixels) {
+    private void constructpixels(int[] pixels) {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
-                matrix[i][j] = pixels[i * 28 + j];
+                this.pixels[i][j] = pixels[i * 28 + j];
             }
         }
     }
 
-    public int[][] getMatrix() {
-        return matrix;
+    public int[][] getpixels() {
+        return pixels;
     }
 
     public int getLabel() {
@@ -37,41 +37,37 @@ public class Digit {
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two handwritten digits.
      * 
-     * The lowest the value the greater the similarity.
+     * The lower the value the greater the similarity.
      * 
      * @param other the digit this object is compared against.
-     * @param pixelMatchRange Range of grey values that is considered a match. If the 
-     * value is 150 then two pixels with values of 80 and 200 would
-     * be considered a match. 200 - 80 = 120. 120 < 150.
      */
-    public void setSimilarity (Digit other, int pixelMatchRange) {
+    public void setSimilarity (Digit other) {
         
-        int difference = matrix.length * matrix.length;
+        int similarityCount = 0;
 
-        for ( int r = 0; r < matrix.length; r++ ) {
-            for ( int c = 0; c < matrix[r].length; c++ ) {
+        for ( int r = 0; r < pixels.length; r++ ) {
+            for ( int c = 0; c < pixels[r].length; c++ ) {
 
-                int diff = Math.abs(matrix[r][c] - other.getMatrix()[r][c]);
-                if ( diff < pixelMatchRange ) {
-                    difference -= 1;
+                if (pixels[r][c] == other.getpixels()[r][c]) {
+                	similarityCount += 1;
                 }
             }
         }
-        similarity = difference;
+        similarity = (double)(similarityCount) / (pixels.length * pixels[0].length);
     }
 
-    public int getSimilarity () {
+    public double getSimilarity() {
         return similarity;
     }
 
     public int compareTo (Digit other) {
-        return this.similarity - other.similarity;
+        return Double.compare(getSimilarity(), other.getSimilarity());
     }
 
-    public void printMatrix() {
+    public void printPixels() {
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
-                System.out.printf("%3d ", matrix[i][j]);
+                System.out.printf("%3d ", pixels[i][j]);
             }
             System.out.println();
         }
@@ -81,7 +77,7 @@ public class Digit {
         BufferedImage image = new BufferedImage(28, 28, BufferedImage.TYPE_BYTE_GRAY);
         for (int i = 0; i < 28; i++) {
             for (int j = 0; j < 28; j++) {
-                int pixelValue = matrix[i][j];
+                int pixelValue = pixels[i][j];
                 int rgb = pixelValue | (pixelValue << 8) | (pixelValue << 16);
                 image.setRGB(j, i, rgb);
             }
@@ -90,6 +86,6 @@ public class Digit {
     }
 
     public String toString () {
-        return String.format("[Label %d, Similarity %d]", label, similarity);
+        return String.format("[Label %d, Similarity %f]", label, similarity);
     }
 }
