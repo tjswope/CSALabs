@@ -17,10 +17,10 @@ public class DigitMatcher {
 	 * File format:
 	 * 
 	 */
-	public DigitMatcher(String filePath) throws IOException {       
+	public DigitMatcher(String filePath) throws IOException { 
+		ArrayList<Digit> digits = new ArrayList<>();
+		
 		Scanner s = new Scanner(new File(filePath));
-
-		digits = new ArrayList<>();
 
 		while (s.hasNext()) {
 			String[] values = s.nextLine().split(",");
@@ -63,7 +63,7 @@ public class DigitMatcher {
 	 * value the greater the similarity).
 	 * 
 	 */
-	public Digit mostSimilar () {
+	public Digit mostSimilar() {
 
 		Digit most = digits.get(0);
 
@@ -112,7 +112,7 @@ public class DigitMatcher {
 	 * @param 
 	 * @return the index (from digits array) of the Digit with greatest similarity.
 	 */
-	public int greatestSimilarity (int l, int h) {
+	public int findGreatestSimilarity (int l, int h) {
 
 		int index = l;
 

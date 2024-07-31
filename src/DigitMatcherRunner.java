@@ -35,10 +35,10 @@ public class DigitMatcherRunner {
 			ArrayList<Digit> testDigits = populateArrayOfTestDigits("src/test2.csv");
 			int matchCount = 0;
 
-			for(int i = 0; i < 1000; i++) {
+			//for(int i = 0; i < 1000; i++) {
 				int j = 0;
-			//for(Digit d: testDigits){
-				Digit d = testDigits.get(i);
+			for(Digit d: testDigits){
+				//Digit d = testDigits.get(i);
 				digitCollection.computeSimilarity(d);
 				int matchingLabel = digitCollection.mostSimilar().getLabel();
 
@@ -49,8 +49,8 @@ public class DigitMatcherRunner {
 				if(j%100 == 0) System.out.print(".");
 			}
 			System.out.println();
-			//System.out.println("match percentage = " + (double)matchCount/testDigits.size());
-			System.out.println("match percentage = " + (double)matchCount/1000);
+			System.out.println("match percentage = " + (double)matchCount/testDigits.size());
+			//System.out.println("match percentage = " + (double)matchCount/1000);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -66,9 +66,9 @@ public class DigitMatcherRunner {
 			int matchCount = 0;
 			
 			int j = 0;
-			for(int i = 0; i < 1000; i++) {
-			//for(Digit d: testDigits){
-				Digit d = testDigits.get(i);
+			//for(int i = 0; i < 1000; i++) {
+			for(Digit d: testDigits){
+				//Digit d = testDigits.get(i);
 				digitCollection.computeSimilarity(d);
 
 				int matchingLabel = digitCollection.kNearestNeighbors(k);
@@ -82,8 +82,8 @@ public class DigitMatcherRunner {
 				if(j%100 == 0) System.out.print(".");
 			}
 			System.out.println();
-			//System.out.println("match percentage = " + (double)matchCount/testDigits.size());
-			System.out.println("match percentage = " + (double)matchCount/1000);
+			System.out.println("match percentage = " + (double)matchCount/testDigits.size());
+			//System.out.println("match percentage = " + (double)matchCount/1000);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -98,9 +98,9 @@ public class DigitMatcherRunner {
 			ArrayList<Digit> testDigits = populateArrayOfTestDigits("src/test2.csv");
 			int matchCount = 0;
 			int j = 0;
-			for(int i = 0; i < 1000; i++) {
-			//for(Digit d: testDigits){
-				Digit d = testDigits.get(i);
+			//for(int i = 0; i < 1000; i++) {
+			for(Digit d: testDigits){
+				//Digit d = testDigits.get(i);
 				digitCollection.computeSimilarity(d);
 
 				int matchingLabel = digitCollection.weightedKNearestNeighbors(k);
@@ -114,17 +114,20 @@ public class DigitMatcherRunner {
 				if(j%100 == 0) System.out.print(".");
 			}
 			System.out.println();
-			//System.out.println("match percentage = " + (double)matchCount/testDigits.size());
-			System.out.println("match percentage = " + (double)matchCount/1000);
+			System.out.println("match percentage = " + (double)matchCount/testDigits.size());
+			//System.out.println("match percentage = " + (double)matchCount/1000);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
-	public static void main(String[] args) {
-		testMostSimilar();
-		testKNearestNeighbors(4);
-		testKNearestNeighbors(5);
+	public static void main(String[] args) throws IOException {
+		
+		ArrayList<Digit> testDigits = populateArrayOfTestDigits("src/test2.csv");
+		System.out.println(testDigits.get(500));
+		
+		//testMostSimilar();
+		//testKNearestNeighbors(4);
+		//testWeightedKNearestNeighbors(5);
 	}
 }
