@@ -86,20 +86,17 @@ public class Digit implements Comparable<Digit>{
     }
 
     public String toString () {
-        String display = "|";
+        String display = "label = " + label + " similarity score = " + getSimilarity() + "\n|";;
         for(int i = 0; i< 28; i++)
         	display += '-';
         display += "|\n|";
-        for(int row = 0; row< pixels.length; row++) {
-        	for(int col = 0; col< pixels.length; col++) 
-        		if(pixels[row][col] == 0)
+        for(int[] row: pixels) {
+        	for(int p: row) 
+        		if(p == 0)
         			display += ' ';
         		else
         			display += '*';
-        	if(row == 14)
-        		display += "|    " + label + "\n|";
-        	else
-        		display += "|\n|";
+        	display += "|\n|";
         }
         for(int i = 0; i< 28; i++)
         	display += '_';
