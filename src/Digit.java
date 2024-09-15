@@ -37,7 +37,7 @@ public class Digit implements Comparable<Digit>{
      * The similarity is calculated by taking the difference (percentage of pixels) 
      * between the two handwritten digits.
      * 
-     * The lower the value the greater the similarity.
+     * The higher the value the greater the similarity.
      * 
      * @param other the digit this object is compared against.
      */
